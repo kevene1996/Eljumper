@@ -10,3 +10,7 @@ body {
   margin: 0;
   background-color: #F0F1F2;
 }
+
+.modal-content {
+  background-color: #F0F1F2;
+}
