@@ -1,0 +1,36 @@
+.title-container {
+  margin: 40px;
+}
+
+.title {
+  color: black;
+  text-align: center;
+  font-size: 56px;
+  font-weight: bold;
+}
+
+.sub-title {
+  color: black;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.information {
+  background-color: #222628;
+  margin: 0px 70px;
+  margin-bottom: 40px;
+  padding: 20px;
+  padding-left: 40px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+}
+
+span {
+  color: white;
+  font-size: 14px;
+}
+
+.data {
+  margin-left: 16px;
+}
