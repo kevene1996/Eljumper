@@ -115,6 +115,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "eljumper-app"
+    }
+  },
+  "defaultProject": "eljumper-app",
+  "cli": {
+    "analytics": "3ac079e3-5d2a-470b-965c-491d388470fb"
+  }
 }
