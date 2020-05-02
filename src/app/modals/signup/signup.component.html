@@ -4,20 +4,58 @@
 <div class="modal-body">
   <div class="row">
     <div class="col-md-12">
-      <form (ngSubmit)="onSubmit($event)">
+      <form [formGroup]="form" #formDir="ngForm" (ngSubmit)="onSubmit($event)" (keydown.enter)="onSubmit($event);">
         <div class="row">
           <div class="col-md-12">
+            <div *ngIf="message" class="alert-message">{{message}}</div>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Username">
+              <input type="text" class="form-control" formControlName="username" placeholder="Usuario"
+                [ngClass]="{ 'form-controlerror': UserName.errors && form.controls.username.touched || formDir.submitted && UserName.errors }">
+              <div *ngIf="UserName.errors && form.controls.username.touched || formDir.submitted && UserName.errors">
+                <div *ngIf="UserName.errors?.minlength" class="invalid-feedback d-block">
+                  Usuario debe ser mas de 4 caracteres.
+                </div>
+                <div *ngIf="UserName.errors?.maxlength" class="invalid-feedback d-block">
+                  Usuario no debe exceder 15 caracteres.
+                </div>
+                <div *ngIf="UserName.errors?.required " class="invalid-feedback d-block">
+                  Usuario es requerido.
+                </div>
+              </div>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Email address">
+              <input type="text" class="form-control" formControlName="email" placeholder="Email address" email="true"
+                [ngClass]="{ 'form-controlerror': Email.errors &&form.controls.email.touched || formDir.submitted && Email.errors }">
+              <div *ngIf="Email.errors && form.controls.email.touched || formDir.submitted && Email.errors">
+                <div *ngIf="Email.errors?.required" class="invalid-feedback d-block">
+                  Email es requerido.
+                </div>
+                <div *ngIf="Email.errors?.pattern" class="invalid-feedback d-block">
+                  Por favor escribe un email valido.
+                </div>
+              </div>
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" placeholder="Password">
+              <input type="password" class="form-control" formControlName="password" placeholder="Contraseña"
+                [ngClass]="{'form-controlerror': Password.errors &&form.controls.password.touched || formDir.submitted && Password.errors  }">
+              <div *ngIf="Password.errors && form.controls.password.touched || formDir.submitted && Password.errors">
+                <div *ngIf="Password.errors?.pattern" class="invalid-feedback d-block">
+                  Contraseña debe incluir 1 letra mayuscula, 1 numero y ser de al menos 8 caracteres.
+                </div>
+                <div *ngIf="Password.errors?.required" class="invalid-feedback d-block">
+                  Contraseña es requerida.
+                </div>
+              </div>
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" placeholder="Confirm password">
+              <input type="password" class="form-control" formControlName="confirmPassword"
+                placeholder="Confirmar contraseña"
+                [ngClass]="{'form-controlerror': ConfirmPassword.errors &&form.controls.confirmPassword.touched || formDir.submitted && ConfirmPassword.errors}">
+              <div
+                *ngIf="ConfirmPassword.errors && form.controls.confirmPassword.touched || formDir.submitted && ConfirmPassword.errors">
+                <div class="invalid-feedback d-block" *ngIf="form.controls.confirmPassword.errors?.MatchPassword">
+                  Confirmar Contraseña & Contraseña deben ser iguales.</div>
+              </div>
             </div>
           </div>
         </div>
