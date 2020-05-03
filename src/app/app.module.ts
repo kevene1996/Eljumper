@@ -12,6 +12,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SigninComponent } from './modals/signin/signin.component';
 import { SignupComponent } from './modals/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms/';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms/';
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   entryComponents: [
     HomeComponent,
