@@ -7,6 +7,7 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-signup',
@@ -30,6 +31,7 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private userService: UsersService
   ) {
     this.form = fb.group({
       username: this.UserName,
@@ -57,12 +59,12 @@ export class SignupComponent implements OnInit {
       this.user.password = this.form.value.password;
       this.user.verified = false;
       this.createUser(this.user);
-      console.log('form valid', this.user);
+      console.log('form  valid');
     }
   }
 
   createUser(user: IUser) {
-
+    this.userService.createUser(user);
   }
 
   MatchPassword(AC: AbstractControl) {
