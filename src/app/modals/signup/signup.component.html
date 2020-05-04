@@ -9,21 +9,6 @@
           <div class="col-md-12">
             <div *ngIf="message" class="alert-message">{{message}}</div>
             <div class="form-group">
-              <input type="text" class="form-control" formControlName="username" placeholder="Usuario"
-                [ngClass]="{ 'form-controlerror': UserName.errors && form.controls.username.touched || formDir.submitted && UserName.errors }">
-              <div *ngIf="UserName.errors && form.controls.username.touched || formDir.submitted && UserName.errors">
-                <div *ngIf="UserName.errors?.minlength" class="invalid-feedback d-block">
-                  Usuario debe ser mas de 4 caracteres.
-                </div>
-                <div *ngIf="UserName.errors?.maxlength" class="invalid-feedback d-block">
-                  Usuario no debe exceder 15 caracteres.
-                </div>
-                <div *ngIf="UserName.errors?.required " class="invalid-feedback d-block">
-                  Usuario es requerido.
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
               <input type="text" class="form-control" formControlName="email" placeholder="Email address" email="true"
                 [ngClass]="{ 'form-controlerror': Email.errors &&form.controls.email.touched || formDir.submitted && Email.errors }">
               <div *ngIf="Email.errors && form.controls.email.touched || formDir.submitted && Email.errors">
@@ -62,6 +47,7 @@
         <div class="button-group">
           <button type="submit" class="button">SIGN UP</button>
         </div>
+        <div *ngIf="loader" class="loader"></div>
       </form>
     </div>
   </div>

@@ -24,11 +24,11 @@ export class SignupComponent implements OnInit {
   public form: FormGroup;
   public message: string;
   public alert: string;
-  public UserName = new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(15)]);
   public Email = new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]);
   public Password = new FormControl('', [Validators.required, Validators.pattern(this.passwordPattern)]);
   public ConfirmPassword = new FormControl('', Validators.required);
   public user: IUser;
+  public loader: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -36,7 +36,6 @@ export class SignupComponent implements OnInit {
     private httpService: HttpRequestService
   ) {
     this.form = fb.group({
-      username: this.UserName,
       email: this.Email,
       password: this.Password,
       confirmPassword: this.ConfirmPassword,
@@ -53,22 +52,27 @@ export class SignupComponent implements OnInit {
       console.log('form invalid');
       return;
     } else {
-      this.alert = 'success';
-      this.message = 'success';
       this.user = {};
-      this.user.username = this.form.value.username;
+      this.user.id = this.form.value.email;
       this.user.email = this.form.value.email;
       this.user.password = this.form.value.password;
       this.user.verified = false;
       this.createUser(this.user);
-      console.log('form  valid');
+      this.loader = true;
     }
   }
 
   createUser(user: IUser) {
-    this.httpService.addUser(user).then(() =>
-      console.log('success')
-    );
+    this.httpService.addUser(user).then(() => {
+      this.alert = 'success';
+      this.message = 'Registro en proceso, revise su correo para verificar su cuenta.';
+      this.loader = false;
+      this.httpService.sendEmailtoUser(user.email).then(() => {
+        console.log('email has been sent');
+      }).catch((err) => {
+        console.log(err, 'error');
+      });
+    });
   }
 
   MatchPassword(AC: AbstractControl) {
