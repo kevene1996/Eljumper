@@ -1,0 +1,135 @@
+.title-container {
+  margin: 40px;
+}
+
+.title {
+  color: black;
+  text-align: center;
+  font-size: 56px;
+  font-weight: bold;
+}
+
+.head-title {
+  margin-bottom: 20px;
+}
+
+.sub-title {
+  color: black;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.information {
+  background-color: #222628;
+  margin: 0px 70px;
+  margin-bottom: 40px;
+  padding: 20px;
+  padding-left: 40px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+}
+
+span {
+  color: white;
+  font-size: 14px;
+}
+
+.data {
+  margin-left: 16px;
+}
+
+.button-group {
+  margin: 5px 0;
+  text-align: center;
+}
+
+.button {
+  background-color: #DF5B3C;
+  color: white;
+  text-align: center;
+  font-size: 14px;
+  padding: 8px 20px;
+  margin-top: 12px;
+  border-radius: 6px;
+  border: 2px solid transparent;
+}
+
+.button:hover {
+  background-color: white;
+  color: #DF5B3C;
+}
+
+.nav-tabs .nav-link.active {
+  color: white;
+  font-size: 14px;
+  background-color: #DF5B3C;
+  border: 1px solid white;
+  border-radius: 2px;
+  border-bottom: 1px solid white;
+
+}
+
+.nav-tabs .nav-link {
+  color: white;
+  font-size: 14px;
+  border: 1px solid transparent;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
+
+.nav-tabs {
+  margin-bottom: 20px;
+}
+
+.form-controlerror {
+  border: 2px solid #DF5B3C;
+}
+
+.invalid-feedback {
+  color: #DF5B3C;
+  text-align: left;
+}
+
+.form-control {
+  font-size: 13px !important;
+}
+
+.loader {
+  border: 10px solid #F0F1F2;
+  border-top: 10px solid #DF5B3C;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  margin: 0 auto;
+  margin-top: 20px;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.alert-message {
+  background-color: #4CAF50;
+  color: white;
+  border: 2px solid #4CAF50;
+  border-radius: 5px;
+  text-align: center;
+  margin: 15px auto;
+  width: 182px;
+  font-size: 14px;
+  padding: 5px;
+}
+
+.contain {
+  height: 340px;
+}
+

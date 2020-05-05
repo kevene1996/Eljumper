@@ -4,20 +4,34 @@
 <div class="modal-body">
   <div class="row">
     <div class="col-md-12">
-      <form (ngSubmit)="onSubmit($event)">
+      <form [formGroup]="form" #formDir="ngForm" (ngSubmit)="onSubmit($event)" (keydown.enter)="onSubmit($event);">
         <div class="row">
           <div class="col-md-12">
+            <div *ngIf="failedMessage" class="alert-failed">{{failedMessage}}</div>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Email address">
+              <input type="text" class="form-control" formControlName="email" placeholder="Email address"
+                [ngClass]="{ 'form-controlerror': Email.errors &&form.controls.email.touched || formDir.submitted && Email.errors }">
+              <div *ngIf="Email.errors && form.controls.email.touched || formDir.submitted && Email.errors">
+                <div *ngIf="Email.errors?.required" class="invalid-feedback d-block">
+                  Email es requerido.
+                </div>
+              </div>
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" placeholder="Password">
+              <input type="password" class="form-control" formControlName="password" placeholder="Contraseña"
+                [ngClass]="{'form-controlerror': Password.errors &&form.controls.password.touched || formDir.submitted && Password.errors  }">
+              <div *ngIf="Password.errors && form.controls.password.touched || formDir.submitted && Password.errors">
+                <div *ngIf="Password.errors?.required" class="invalid-feedback d-block">
+                  Contraseña es requerida.
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <div class="button-group">
           <button type="submit" class="button">SIGN IN</button>
         </div>
+        <div *ngIf="loader" class="loader"></div>
       </form>
     </div>
   </div>

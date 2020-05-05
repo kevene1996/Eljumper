@@ -1,0 +1,121 @@
+<app-header></app-header>
+<div class="container">
+  <div class="title-container">
+    <div class="title">EL JUMPER</div>
+    <div class="sub-title">Buscador de BASIC y HIGH</div>
+  </div>
+  <div class="information">
+    <div>
+      <span>INFORMACION GENERAL</span>
+    </div>
+    <div class="data">
+      <span>- doiashdoashdoiahsodihasodhoahsda</span><br>
+      <span>- doiashdoashdoiahsodihasodhoahsda</span><br>
+      <span>- doiashdoashdoiahsodihasodhoahsda</span><br>
+      <span>- doiashdoashdoiahsodihasodhoahsda</span><br>
+    </div>
+  </div>
+  <div class="information">
+    <div>
+      <span>BUSQUEDA</span>
+    </div>
+    <div class="data">
+      <span>- doiashdoashdoiahsodihasodhoahsda</span><br>
+      <span>- doiashdoashdoiahsodihasodhoahsda</span><br>
+      <span>- doiashdoashdoiahsodihasodhoahsda</span><br>
+      <span>- doiashdoashdoiahsodihasodhoahsda</span><br>
+    </div>
+  </div>
+  <div class='contain'>
+    <div class="information">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="head-title">
+            <span>REGISTRO</span>
+          </div>
+          <div class="button-group">
+            <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+              <li [ngbNavItem]="1">
+                <a ngbNavLink>BASIC</a>
+                <ng-template ngbNavContent>
+                  <form [formGroup]="formBasic" #formDir="ngForm" (ngSubmit)="onSubmitBasic($event)"
+                    (keydown.enter)="onSubmitBasic($event);">
+                    <div class="form-group">
+                      <input type="text" maxlength="5" class="form-control" formControlName="psid"
+                        placeholder="psid (5 primeros digitos)"
+                        [ngClass]="{ 'form-controlerror': formDir.submitted && PsidBasic.errors }">
+                      <div *ngIf="formDir.submitted && PsidBasic.errors">
+                        <div *ngIf="PsidBasic.errors?.required" class="invalid-feedback d-block">
+                          Psid requerido.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" maxlength="5" class="form-control" formControlName="value"
+                        placeholder="basic (5 digitos)"
+                        [ngClass]="{ 'form-controlerror': formDir.submitted && ValueBasic.errors }">
+                      <div *ngIf="formDir.submitted && ValueBasic.errors">
+                        <div *ngIf="ValueBasic.errors?.required" class="invalid-feedback d-block">
+                          Valor de basic requerido.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="button-group">
+                      <button type="submit" class="button">REGISTRAR</button>
+                    </div>
+                    <div *ngIf="loader" class="loader"></div>
+                    <div *ngIf="message" class="alert-message">{{message}}</div>
+                  </form>
+                </ng-template>
+              </li>
+              <li [ngbNavItem]="2">
+                <a ngbNavLink>HIGH</a>
+                <ng-template ngbNavContent>
+                  <form [formGroup]="formHigh" #formDir="ngForm" (ngSubmit)="onSubmitHigh($event)"
+                    (keydown.enter)="onSubmitHigh($event);">
+                    <div class="form-group">
+                      <input type="text" maxlength="5" class="form-control" formControlName="pid"
+                        placeholder="pid de tu cuenta"
+                        [ngClass]="{ 'form-controlerror': formDir.submitted && PidHigh.errors }">
+                      <div *ngIf="formDir.submitted && PidHigh.errors">
+                        <div *ngIf="PidHigh.errors?.required" class="invalid-feedback d-block">
+                          Pid requerido.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" maxlength="5" class="form-control" formControlName="psid"
+                        placeholder="psid (5 primeros digitos)"
+                        [ngClass]="{ 'form-controlerror': formDir.submitted && PsidHigh.errors }">
+                      <div *ngIf="formDir.submitted && PsidHigh.errors">
+                        <div *ngIf="PsidHigh.errors?.required" class="invalid-feedback d-block">
+                          Psid requerido.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" maxlength="5" class="form-control" formControlName="value" placeholder="high"
+                        [ngClass]="{ 'form-controlerror': formDir.submitted && ValueHigh.errors }">
+                      <div *ngIf="formDir.submitted && ValueHigh.errors">
+                        <div *ngIf="ValueHigh.errors?.required" class="invalid-feedback d-block">
+                          Valor de basic requerido.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="button-group">
+                      <button type="submit" class="button">REGISTRAR</button>
+                    </div>
+                    <div *ngIf="loader" class="loader"></div>
+                    <div *ngIf="message" class="alert-message">{{message}}</div>
+                  </form>
+                </ng-template>
+              </li>
+            </ul>
+            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

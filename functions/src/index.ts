@@ -1,5 +1,5 @@
 import * as functions from 'firebase-functions';
-import { IUser } from '../../src/app/interfaces/users';
+import { IUser, IDatos } from '../../src/app/interfaces/users';
 const admin = require('firebase-admin');
 const express = require('express');
 const app = express();
@@ -43,14 +43,53 @@ exports.sendEmailtoUser = functions.https.onRequest((req, res) => {
       to: email,
       from: 'Eljumper soporte <kevenebou@hotmail.com>',
       subject: 'Registro de usuario',
-      text: 'Buenas usuario, para verificar su cuenta debe realizar un pago de 1$ (Tasa: Monitor Dolar) a la cuenta con los siguientes datos, luego responder a este email con un capture de la transaccion y su cuenta sera activada en un intervalo de 10 a 60 minutos luego de que los datos sean verificados.'
-
+      html: `<html><body>
+                  Buenas usuario, para verificar su cuenta debe realizar un pago de<br/>
+                  1$ (Tasa: Monitor Dolar) a la cuenta con los siguientes datos<br/>
+                  luego responder a este email con un capture de la transaccion y su cuenta <br/>
+                  sera activada en un intervalo de 10 a 60 minutos luego de que los datos sean verificados.`
     };
     transporter.sendMail(mailOptions).then(() => {
       res.status(200).send();
     }, (error: any) => {
       console.log(error);
       res.status(400).send(error)
+    });
+  });
+});
+
+exports.userSignIn = functions.https.onRequest((req, res) => {
+  const user: IUser = req.body.user;
+  const users: any = [];
+  cors(req, res, () => {
+    console.log(user);
+    admin.firestore().collection(`users`)
+      .where('email', '==', user.email)
+      .where('password', '==', user.password)
+      .get().then((snaps: any) => {
+        snaps.forEach((snap: any) => {
+          users.push({
+            id: snap.id,
+            ...snap.data()
+          })
+        })
+        console.log(users);
+        res.status(200).send(users)
+      }, (error: any) => {
+        res.status(400).send(error);
+      })
+  })
+})
+
+exports.saveDatos = functions.https.onRequest((req, res) => {
+  const dato: IDatos = req.body.dato;
+  const batch = admin.firestore().batch();
+  cors(req, res, () => {
+    batch.set(admin.firestore().doc(`datos/${dato.psid}`), dato);
+    batch.commit().then(() => {
+      res.status(200).send();
+    }, (error: any) => {
+      res.status(400).send(error);
     });
   });
 });

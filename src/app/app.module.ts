@@ -13,6 +13,7 @@ import { SigninComponent } from './modals/signin/signin.component';
 import { SignupComponent } from './modals/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms/';
 import { HttpClientModule } from '@angular/common/http';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     SigninComponent,
     SignupComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
